@@ -249,6 +249,34 @@ extension Just {
     ) -> Result<ElementOfResult, Error>.OCombine.Publisher {
         return .init(Result { try nextPartialResult(initialResult, output) })
     }
+
+    public func prepend(_ elements: Output...) -> Publishers.Sequence<[Output], Never> {
+        var sequence = elements
+        sequence.append(output)
+        return .init(sequence: sequence)
+    }
+
+    public func prepend<Elements: Sequence>(
+        _ elements: Elements
+    ) -> Publishers.Sequence<[Output], Never> where Output == Elements.Element {
+        var sequence = Array(elements)
+        sequence.append(output)
+        return .init(sequence: sequence)
+    }
+
+    public func append(_ elements: Output...) -> Publishers.Sequence<[Output], Never> {
+        var sequence = elements
+        sequence.insert(output, at: 0)
+        return .init(sequence: sequence)
+    }
+
+    public func append<Elements: Sequence>(
+        _ elements: Elements
+    ) -> Publishers.Sequence<[Output], Never> where Output == Elements.Element {
+        var sequence = [output]
+        sequence.append(contentsOf: elements)
+        return .init(sequence: sequence)
+    }
 }
 
 extension Just {
