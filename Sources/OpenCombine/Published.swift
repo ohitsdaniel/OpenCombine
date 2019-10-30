@@ -68,8 +68,9 @@ public struct Published<Value> {
         }
     }
 
-    @available(*, unavailable,
-               message: "@Published is only available on properties of classes")
+    @available(*, unavailable, message: """
+               @Published is only available on properties of classes
+               """)
     public var wrappedValue: Value {
         get { fatalError() }
         set { fatalError() }
