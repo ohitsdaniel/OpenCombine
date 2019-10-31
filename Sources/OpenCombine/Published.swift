@@ -68,13 +68,15 @@ public struct Published<Value> {
         }
     }
 
+    // swiftlint:disable let_var_whitespace
     @available(*, unavailable, message: """
                @Published is only available on properties of classes
                """)
     public var wrappedValue: Value {
         get { fatalError() }
-        set { fatalError() }
+        set { fatalError() } // swiftlint:disable:this unused_setter_value
     }
+    // swiftlint:enable let_var_whitespace
 
     public static subscript<EnclosingSelf: AnyObject>(
         _enclosingInstance object: EnclosingSelf,
