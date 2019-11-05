@@ -14,6 +14,7 @@
 /// of the property first.
 /// Note that the `@Published` property is class-constrained.
 /// Use it with properties of classes, not with non-class types like structures.
+@available(swift, introduced: 5.1)
 @propertyWrapper
 public struct Published<Value> {
 
@@ -96,9 +97,7 @@ public struct Published<Value> {
 }
 #else
 
-@available(*, unavailable, message: """
-           The Published property wrapper is available since Swift 5.1
-           """)
+@available(swift, introduced: 5.1)
 public typealias Published = Never
 
 #endif // swift(>=5.1)
